@@ -1,5 +1,5 @@
 ## Setup
- - Copy `.env.example` to `.env`
+ - Copy `.env.template` to `.env` and update the file accordingly
  - Run `npm install`
 
 ## Seeding
