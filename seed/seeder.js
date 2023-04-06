@@ -79,11 +79,11 @@ const parseRow = (obj) => {
 const saveNode = async (parent, node) => {
  let newNode = await Topic.findOne({name: node.name});
  if(!newNode) {
-   newNode = {
+   newNode = new Topic({
     name: node.name,
     parent: parent ? parent._id : null,
     path: parent ? `${parent.path}/${node.name}`: node.name
-  }
+  })
   await Topic.create(newNode);
  }
 if(node.child) {
@@ -92,6 +92,7 @@ if(node.child) {
 }
 if(parent) {
   if(!parent.children) parent.children = []
+  parent.children = parent.children.map(child => child._id)
   if(!parent.children.includes(newNode._id)) {
     parent.children.push(newNode._id)
     await Topic.findByIdAndUpdate(parent._id, parent);

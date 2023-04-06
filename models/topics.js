@@ -6,19 +6,20 @@ const TopicSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  parent: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Topic'
-  },
-  path: {
-    type: String,
-    required: true
-  },
   children: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Topic'
   }]
 });
+
+const autoPopulateChildren = function(next) {
+    this.populate('children');
+    next();
+};
+
+TopicSchema
+.pre('findOne', autoPopulateChildren)
+.pre('find', autoPopulateChildren)
 
 const Topic = mongoose.model('Topic', TopicSchema);
 
