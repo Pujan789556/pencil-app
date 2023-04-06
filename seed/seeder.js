@@ -63,10 +63,10 @@ mongoose
 const parseRow = (obj) => {
   const keys = Object.keys(obj).filter(key => key !== '');
   if (keys.length === 1) {
-    const name = obj[keys[0]];
+    const name = obj[keys[0]].trimEnd();
     return { name };
   } else {
-    const name = obj[keys[0]];
+    const name = obj[keys[0]].trimEnd();
     const childObj = keys.slice(1).reduce((acc, key) => {
       if(obj[key] !== '')acc[key] = obj[key];
       return acc;
