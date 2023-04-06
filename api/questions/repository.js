@@ -17,7 +17,6 @@ const searchQuestion = (queryString) => new Promise(async (resolve, reject) => {
                 $eq: queryString
             }
         })
-        console.log('Root TOPIC', rootTopic)
         if(rootTopic) {
             allTopic.push(rootTopic.name)
             if(rootTopic.children.length) {

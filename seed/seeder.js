@@ -49,7 +49,7 @@ mongoose
                     questionData.questionNumber = questionsRow[i][q]
                 } else if(q !== '' && questionsRow[i][q] !== '') {
                     if(!questionData.annotation) questionData.annotation = [];
-                    questionData.annotation.push(questionsRow[i][q])
+                    questionData.annotation.push(questionsRow[i][q].trimEnd())
                 }
             }
            await Question.create(questionData)
